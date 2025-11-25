@@ -6,6 +6,7 @@ loss_l1 = nn.SmoothL1Loss(beta=1.0)
 loss_bce_keepdim = nn.BCELoss(reduction='none')
 
 def sdfLoss(pred, label):
+    # 公式(7)：近表面截断 SDF 损失，对齐论文中 TSDF 在真实采样点附近的监督项
     loss = torch.zeros_like(label, dtype = label.dtype, device = label.device)
     middle_point = label/2.0
     middle_point_abs = torch.abs(middle_point)
@@ -29,6 +30,7 @@ def shift_bce_loss(x):
 
 
 def smooth_sdfLoss(pred, label):
+    # 公式(7) 的平滑版本：利用 Welsch 函数缓解大残差对训练的影响
     loss = torch.zeros_like(label, dtype = label.dtype, device = label.device)
 
     middle_result = pred*label
@@ -71,7 +73,7 @@ def numerical_ekional_(field, mlp, data, t, step, static=False):
 
     normals = (((pred_total[0] - pred_total[1])/(2*step)).reshape(-1,data.shape[0])).T
 
-    eikonal_loss = torch.abs(normals.norm(2,dim=-1) - 1.0)
+    eikonal_loss = torch.abs(normals.norm(2,dim=-1) - 1.0)  # 公式(8)：|∇φ|=1 的 Eikonal 约束
 
     return eikonal_loss
 
@@ -125,13 +127,14 @@ def numerical_ekional_3d(field, mlp, data, step):
 
     normals = (((pred_total[0] - pred_total[1])/(2*step)).reshape(-1,data.shape[0])).T
 
-    eikonal_loss = torch.abs(normals.norm(2,dim=-1) - 1.0)
+    eikonal_loss = torch.abs(normals.norm(2,dim=-1) - 1.0)  # 公式(8)
 
     return eikonal_loss
 
 
 
 def double_numerical_normals(field, mlp, data, t, step):
+    # 公式(8) 的实现细化：分别计算静态/动态场的数值梯度以监督 Eikonal 约束
 
     input_x_dx = data + torch.tensor([step,0,0], dtype=data.dtype, device=data.device)
     input_x_mdx = data + torch.tensor([-step,0,0], dtype=data.dtype, device=data.device)

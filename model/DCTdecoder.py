@@ -26,7 +26,7 @@ class Decoder(nn.Module):
         self.layers = nn.ModuleList(layers)
         self.lout = nn.Linear(self.hidden_dim, self.output_dim, True)
 
-        #DCT initialization
+        # 公式(2)：基于 DCT 的时间基函数初始化，提供时域正交基以分解动态 TSDF
         matrix = torch.ones(self.output_dim, self.t_num, device='cuda')
 
         for n in range(self.output_dim):
@@ -67,7 +67,7 @@ class Decoder(nn.Module):
                 h = F.relu(l(h))
         weights = self.lout(h).squeeze(1)
 
-        signals = torch.mm(weights, self.full_basis)
+        signals = torch.mm(weights, self.full_basis)  # 公式(1)：用基权重重建时空 TSDF 曲线 φ(x,t)
         static_output = weights[:,0]
         dynamic_output = signals[torch.arange(signals.shape[0]),t.reshape(1,-1)].squeeze(0)
 

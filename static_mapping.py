@@ -141,12 +141,14 @@ def static_mapping(configs):
                     surface_static_pred, surface_dynamic_pred, surface_weights = decoder(surface_features, surface_time.long())
 
                     surface_loss = sdfloss.sdfLoss(surface_dynamic_pred, surface_pd).mean()
+                    # 公式(7)：近表面 TSDF 监督项，强制动态场在真实命中点附近逼近测量距离
                     
                     free_time = iter_ray_times.repeat(1,  configs.free_sample_num).reshape(-1,1)
                     free_features = feature_field.get_features(free_samples, free_time.long())
                     free_static_pred, free_dynamic_pred, _ = decoder(free_features, free_time.long())
 
                     tloss = torch.abs(free_dynamic_pred - configs.truncated_length).mean()
+                    # 公式(10)：自由空间截断约束，保证射线非占据段的 SDF 保持在截断距离
                     
                     eikonal_indices = torch.randint(0, surface_sample.shape[0], (iter_end_points.shape[0],), device='cuda')
                     eikonal_sample = surface_sample[eikonal_indices]
@@ -155,6 +157,7 @@ def static_mapping(configs):
                     _, d_normal, _ = sdfloss.double_numerical_normals(feature_field, decoder, eikonal_sample, eikonal_times, e_step)
 
                     eikonal_loss = torch.abs(d_normal.norm(2,dim=-1) - 1.0)
+                    # 公式(8)：Eikonal 正则，使梯度模长接近 1，维护有符号距离属性
 
                     certain_free_indices = torch.randint(0, certain_free_points.shape[0], (configs.batch_size, ), device='cuda')
                     certain_free_samples = certain_free_points[certain_free_indices]
@@ -163,10 +166,12 @@ def static_mapping(configs):
                     certain_static_pred, _, _ = decoder(certain_free_features, certain_time.long())
 
                     certain_free_loss = torch.abs(certain_static_pred - configs.truncated_length).mean()
+                    # 公式(11)：确定自由空间损失，在明确空域中拉回静态场的数值
 
                     loss = surface_loss + configs.ekional_lamda*eikonal_loss.mean() + \
                                           configs.free_space_lamda*tloss + \
                                           configs.certain_free_lamda*certain_free_loss
+                    # 公式(12)：整体优化目标，为各项损失的加权求和
 
                     loss.backward()
                     opt.step()
