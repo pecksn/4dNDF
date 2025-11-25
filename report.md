@@ -142,6 +142,8 @@ Dynamic objects segmentation 部分：
 
 
 
+![image-20251125140128827](D:\Desktop\GDTU\Notes\picture\image-20251125140128827.png)
+
 #### Newer College数据集
 
 ##### **mesh.ply（完整网格）**
@@ -165,11 +167,19 @@ Dynamic objects segmentation 部分：
 
   ![image-20251124204736004](D:\Desktop\GDTU\Notes\picture\image-20251124204736004.png)
 
+##### 评估测试结果
 
+![image-20251125142928713](D:\Desktop\GDTU\Notes\picture\image-20251125142928713.png)
 
 #### Co-Fusion的car4数据
 
 ![image-20251124204533781](D:\Desktop\GDTU\Notes\picture\image-20251124204533781.png)
+
+##### 评估测试结果
+
+![](D:\Desktop\GDTU\Notes\picture\image-20251125135639530.png)
+
+
 
 ### 动态对象分割
 
