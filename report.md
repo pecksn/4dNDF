@@ -132,17 +132,17 @@ Dynamic objects segmentation 部分：
 
 运行后有以下几个结果
 
-![image-20251124201203624](D:\Desktop\GDTU\Notes\picture\image-20251124201203624.png)
+![image-20251124201203624](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251124201203624.png)
 
 ### 地表重建
 
 #### 测试数据（来自KITTI seq 00的20帧）
 
-![image-20251124204929401](D:\Desktop\GDTU\Notes\picture\image-20251124204929401.png)
+![image-20251124204929401](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251124204929401.png)
 
 
 
-![image-20251125140128827](D:\Desktop\GDTU\Notes\picture\image-20251125140128827.png)
+![image-20251125140128827](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251125140128827.png)
 
 #### Newer College数据集
 
@@ -153,7 +153,7 @@ Dynamic objects segmentation 部分：
 - 文件相对较大
 - 适合观察整体重建质量
 
-![image-20251124204804326](D:\Desktop\GDTU\Notes\picture\image-20251124204804326.png)
+![image-20251124204804326](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251124204804326.png)
 
 ##### **cropped_mesh.ply（裁剪网格）**
 
@@ -165,19 +165,19 @@ Dynamic objects segmentation 部分：
 
 - 便于**集中分析关键区域**的重建质量
 
-  ![image-20251124204736004](D:\Desktop\GDTU\Notes\picture\image-20251124204736004.png)
+  ![image-20251124204736004](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251124204736004.png)
 
 ##### 评估测试结果
 
-![image-20251125142928713](D:\Desktop\GDTU\Notes\picture\image-20251125142928713.png)
+![image-20251125142928713](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251125142928713.png)
 
 #### Co-Fusion的car4数据
 
-![image-20251124204533781](D:\Desktop\GDTU\Notes\picture\image-20251124204533781.png)
+![image-20251124204533781](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251124204533781.png)
 
 ##### 评估测试结果
 
-![](D:\Desktop\GDTU\Notes\picture\image-20251125135639530.png)
+![](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251125135639530.png)
 
 
 
@@ -185,4 +185,4 @@ Dynamic objects segmentation 部分：
 
 #### 序列00评估结果
 
-![image-20251124204523175](D:\Desktop\GDTU\Notes\picture\image-20251124204523175.png)
+![image-20251124204523175](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251124204523175.png)
