@@ -132,7 +132,7 @@ Dynamic objects segmentation 部分：
 
 运行后有以下几个结果
 
-![image-20251124201203624](D:\Desktop\GDTU\研一课程\人工智能开源软件\4dNDF\image\image-20251124201203624.png)
+![image-20251124201203624](https://github.com/pecksn/4dNDF/blob/main/image/image-20251124201203624.png)
 
 ### 地表重建
 
